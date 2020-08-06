@@ -1,0 +1,34 @@
+{
+  "name": "api-vehicles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alefmreis/api-vehicles.git"
+  },
+  "author": "Alef Reis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alefmreis/api-vehicles/issues"
+  },
+  "homepage": "https://github.com/alefmreis/api-vehicles#readme",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa2-cors": "^2.0.6",
+    "pg": "^8.3.0",
+    "sequelize": "^6.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
+  }
+}

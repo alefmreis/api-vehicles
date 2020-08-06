@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  postgres_db:
+    image: postgres
+    container_name: postgres
+    environment:
+        POSTGRES_USER: postgres_username
+        POSTGRES_PASSWORD: postgres_password
+        POSTGRES_DB: postgres_database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-vehicles
+    environment:
+      PORT: 3500
+      POSTGRES_DATABASE: postgres_database
+      POSTGRES_USERNAME: postgres_username
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432     
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - 3500:3500
+    command: npm run dev
+    depends_on: 
+      - postgres_db
+
+volumes:
+  postgres_data:
+
