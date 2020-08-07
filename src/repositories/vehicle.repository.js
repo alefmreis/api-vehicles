@@ -23,13 +23,13 @@ class VehicleRepository {
       order: [['value', 'ASC']],
       include: [
         {
-          model: database.conn.models.Brand,
-          as: 'brand',
-          attributes: ['id', 'name']
-        },
-        {
           model: database.conn.models.Models,
           as: 'model',
+          include: [{
+            model: database.conn.models.Brand,
+            as: 'brand',
+            attributes: ['id', 'name']
+          }],
           attributes: ['id', 'name']
         }
       ],
@@ -41,6 +41,10 @@ class VehicleRepository {
 
   getById(vehicleId) {
     return Vehicle.findOne({ where: { id: vehicleId } });
+  }
+
+  getByModelId(modelId) {
+    return Vehicle.findOne({ where: { model_id: modelId } });
   }
 
   create(vehicle) {

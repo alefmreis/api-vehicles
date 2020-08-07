@@ -104,6 +104,13 @@ class ModelService {
       return onNotFound({ message: `Model ${modelId} not found` }, ctx);
     }
 
+    const vehicleService = require('./vehicle.service');
+    const vehicle = await vehicleService.checkIfVehicleExistsByModelId(modelId);
+
+    if (vehicle) {
+      return onConflict({ message: `You can not delete this model ${modelId} because there is a vehicle registered with this model` }, ctx);
+    }
+
     await repository.delete(modelId);
 
     return onNoContent(ctx);
@@ -116,6 +123,11 @@ class ModelService {
 
   async checkIfModelExistsByName(modelName) {
     const model = await repository.getByName(modelName);
+    return !!model;
+  }
+
+  async checkIfModelExistsByBrandId(brandId) {
+    const model = await repository.getByBrandId(brandId);
     return !!model;
   }
 }

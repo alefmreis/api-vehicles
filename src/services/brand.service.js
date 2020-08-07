@@ -87,6 +87,13 @@ class BrandService {
       return onNotFound({ message: `Brand ${brandId} not found` }, ctx);
     }
 
+    const modelService = require('./model.service');
+    const model = await modelService.checkIfModelExistsByBrandId(brandId);
+
+    if (model) {
+      return onConflict({ message: `You can not delete this brand ${brandId} because there is a model registered with this brand` }, ctx);
+    }
+
     await repository.delete(brandId);
 
     return onNoContent(ctx);

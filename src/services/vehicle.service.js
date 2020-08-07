@@ -3,7 +3,6 @@ const repository = require('../repositories/vehicle.repository');
 const check = require('check-types');
 const pagingHelper = require('../_shared/helpers/paging.helper');
 const vehicleFluentValidate = require('../business/fluent-validators/vehicle.fluent-validator');
-const brandService = require('./brand.service');
 const modelService = require('./model.service');
 
 class VehicleService {
@@ -43,12 +42,6 @@ class VehicleService {
       return onUnprocessableEntity(validator, ctx);
     }
 
-    const brand = await brandService.checkIfBrandExistsById(vehicle.brand_id);
-
-    if (!brand) {
-      return onNotFound({ message: `Brand ${vehicle.brand_id} not found` }, ctx);
-    }
-
     const model = await modelService.checkIfModelExistsById(vehicle.model_id);
 
     if (!model) {
@@ -75,12 +68,6 @@ class VehicleService {
 
     if (validator.length > 0) {
       return onUnprocessableEntity(validator, ctx);
-    }
-
-    const brand = await brandService.checkIfBrandExistsById(vehicle.brand_id);
-
-    if (!brand) {
-      return onNotFound({ message: `Brand ${vehicle.brand_id} not found` }, ctx);
     }
 
     const model = await modelService.checkIfModelExistsById(vehicle.model_id);
@@ -112,6 +99,11 @@ class VehicleService {
 
   async checkIfVehicleExistsById(vehicleId) {
     const vehicle = await repository.getById(vehicleId);
+    return !!vehicle;
+  }
+
+  async checkIfVehicleExistsByModelId(modelId) {
+    const vehicle = await repository.getByModelId(modelId);
     return !!vehicle;
   }
 }
