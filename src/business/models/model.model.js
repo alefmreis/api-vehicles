@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const database = require('../_shared/database/postgres');
+const database = require('../../_shared/database/postgres');
 
 class Models extends Model {
   static init(connection) {

@@ -1,5 +1,12 @@
-const validator = require('fluent-validator');
+module.exports = (brand) => {
+  if (typeof brand.name !== 'string') {
+    return [{
+      validation: 'isString',
+      message: 'Required a valid string value',
+      value: brand.name,
+      param: 'name'
+    }];
+  }
 
-module.exports = (brand) => validator()
-  .validate(brand.name).isNotNullOrUndefined().and.isAlpha()
-  .getErrors();
+  return [];
+};
