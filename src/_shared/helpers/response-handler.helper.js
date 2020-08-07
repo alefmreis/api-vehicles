@@ -44,6 +44,11 @@ class ResponseHandler {
   onNoContent(ctx) {
     ctx.status = httpStatus.NO_CONTENT;
   }
+
+  onUnauthorized(data = {}, ctx) {
+    ctx.status = httpStatus.UNAUTHORIZED;
+    ctx.body = Object.assign(data);
+  }
 }
 
 module.exports = new ResponseHandler();
