@@ -15,7 +15,7 @@ class Vehicle extends Model {
 
   static associate(connection) {
     this.belongsTo(connection.models.Brand, { foreignKey: 'brand_id', as: 'brand' });
-    this.belongsTo(connection.models.Models, { foreignKey: 'model_id', as: 'modelId' });
+    this.belongsTo(connection.models.Models, { foreignKey: 'model_id', as: 'model' });
   }
 }
 
