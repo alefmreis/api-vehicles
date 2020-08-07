@@ -14,7 +14,8 @@ class Database {
     Database.connection = new Sequelize(`postgres://${env.postgres.username}:${env.postgres.password}@${env.postgres.host}:${env.postgres.port}/${env.postgres.database}`, {
       define: {
         underscored: true,
-        timestamps: true
+        timestamps: true,
+        paranoid: true
       }
     });
   }
