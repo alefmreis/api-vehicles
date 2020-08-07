@@ -7,6 +7,7 @@ class Application {
   constructor() {
     this.server = new Koa();
     this.setServerMiddlewares();
+    this.setRouters();
     this.setDatabase();
   }
 
@@ -16,6 +17,13 @@ class Application {
       allowMethods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
       credentials: true
     }));
+  }
+
+  setRouters() {
+    const RouterLoaderHelper = require('./helpers/router-load.helper');
+    const routerLoader = new RouterLoaderHelper(this.server);
+
+    routerLoader.load();
   }
 
   setDatabase() {

@@ -18,8 +18,13 @@
   },
   "homepage": "https://github.com/alefmreis/api-vehicles#readme",
   "dependencies": {
+    "check-types": "^11.1.2",
+    "fluent-validator": "^1.1.0",
+    "glob": "^7.1.6",
+    "http-status": "^1.4.2",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.1.0",
     "koa2-cors": "^2.0.6",
     "pg": "^8.3.0",
     "sequelize": "^6.3.4"
