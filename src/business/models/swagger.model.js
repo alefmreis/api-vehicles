@@ -9,11 +9,9 @@ module.exports = {
   },
   "basePath": "/api",
   "host": `localhost:${env.port}`,
-  "components": {
-    "securitySchemes": {
-      "basicAuth": {
-        "type": "basic"
-      }
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
     }
   },
   "paths": {
@@ -82,11 +80,9 @@ module.exports = {
             "description": "Resource already exists"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
       }
     },
     "/brands/{brandId}": {
@@ -117,11 +113,9 @@ module.exports = {
             "description": "Resource Not Found"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
       },
       "put": {
         "tags": [
@@ -165,11 +159,9 @@ module.exports = {
             "description": "Resource already exists"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
       },
       "delete": {
         "tags": [
@@ -198,11 +190,9 @@ module.exports = {
             "description": "Resource Not Found"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
       }
     },
     "/models/": {
@@ -276,11 +266,9 @@ module.exports = {
             "description": "Resource already exists"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
       }
     },
     "/models/{modelId}": {
@@ -311,11 +299,10 @@ module.exports = {
             "description": "Resource Not Found"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
+
       },
       "put": {
         "tags": [
@@ -359,11 +346,10 @@ module.exports = {
             "description": "Resource already exists"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
+
       },
       "delete": {
         "tags": [
@@ -392,11 +378,9 @@ module.exports = {
             "description": "Resource Not Found"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
       }
     },
     "/vehicles/": {
@@ -470,11 +454,10 @@ module.exports = {
             "description": "Resource already exists"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
+
       }
     },
     "/vehicle/{vehicleId}": {
@@ -505,11 +488,10 @@ module.exports = {
             "description": "Resource Not Found"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
+
       },
       "put": {
         "tags": [
@@ -553,11 +535,10 @@ module.exports = {
             "description": "Resource already exists"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
+
       },
       "delete": {
         "tags": [
@@ -586,11 +567,10 @@ module.exports = {
             "description": "Resource Not Found"
           }
         },
-        "security": [
-          {
-            "basicAuth": []
-          }
-        ]
+        "security": {
+          "basicAuth": []
+        }
+
       }
     }
   },
