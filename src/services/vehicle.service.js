@@ -26,7 +26,7 @@ class VehicleService {
       return onBadRequest({ message: 'Vehicle id must be an integer' }, ctx);
     }
 
-    const vehicle = await repository.getById(vehicleId);
+    const vehicle = await repository.getById(parseInt(vehicleId, 10));
 
     if (!vehicle) {
       return onNotFound({ message: `Vehicle ${vehicleId} not found` }, ctx);
@@ -58,7 +58,7 @@ class VehicleService {
       return onBadRequest({ message: 'Vehicle id must be an integer' }, ctx);
     }
 
-    const existentVehicle = await this.checkIfVehicleExistsById(vehicleId);
+    const existentVehicle = await this.checkIfVehicleExistsById(parseInt(vehicleId, 10));
 
     if (!existentVehicle) {
       return onNotFound({ message: `Vehicle ${vehicleId} not found` }, ctx);
@@ -83,13 +83,13 @@ class VehicleService {
 
   async delete(vehicleId, ctx) {
     if (!check.integer(parseInt(vehicleId, 10))) {
-      return onBadRequest({ message: 'VEhicle id must be an integer' }, ctx);
+      return onBadRequest({ message: 'Vehicle id must be an integer' }, ctx);
     }
 
-    const vehicle = await this.checkIfVehicleExistsById(vehicleId);
+    const vehicle = await this.checkIfVehicleExistsById(parseInt(vehicleId, 10));
 
     if (!vehicle) {
-      return onNotFound({ message: `Model ${vehicleId} not found` }, ctx);
+      return onNotFound({ message: `Vehicle ${vehicleId} not found` }, ctx);
     }
 
     await repository.delete(vehicleId);
