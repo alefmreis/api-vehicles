@@ -17,9 +17,9 @@ This project is an MVP of an API that performs query actions in which several us
 ### Adopted Assumptions
 - Timestamp fields (created_at, updated_at) have been added to each entity's table
 - Soft delete instead delete bank column
-- Regra de cadastrar value do veiculo
-- Busca de Veiculos como model e dentro de model brand
-- Endpoints que possui autorizathion são basic
+- For the time being the vehicle's value entity is being registered as a string, due to the fact that it has the currency in front. For future updates, one more field will be used in the field entity for the currency type and then the value property will be of the float type
+- As the business rule says, a vehicle has a model and the model has a brand. So it was considered that in the vehicle listing, each vehicle turns with a model object and inside the model object will come a brand object.
+- Only query endpoints will be public, all others must use basic authorization
 
 
 ## Technologies Used
@@ -45,10 +45,23 @@ Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
 
 ## How to run the application locally
 
+Environment Variables
+```
+  PORT = This field references the port on which the application will be listening
+  ADMIN_USERNAME = This field references the username used for basic auth authentication of admin endpoints
+  ADMIN_PASSWORD = This field references the password used for basic auth authentication of admin endpoints
+  POSTGRES_DATABASE = Database in which the application that will connect
+  POSTGRES_USERNAME = Username of the application that will connect with postgres
+  POSTGRES_PASSWORD = Password of the application that will connect with postgres
+  POSTGRES_HOST = Host where postgres is working
+  POSTGRES_PORT = Port on which postgres is running
+```
+
 #### Docker
 ```sh
 docker-compose up --build
 ```
+Remember that when using docker, all environment variables are configured in the docker-compose.yml file.
 
 #### Node installation
 
@@ -60,21 +73,7 @@ npm install
 npm run dev
 ```
 
-Application Environment Variables
-```
-  PORT = This field references the port on which the application will be listening
 
-  ADMIN_USERNAME = This field references the username used for basic auth authentication of admin endpoints
-  ADMIN_PASSWORD = This field references the password used for basic auth authentication of admin endpoints
-
-  POSTGRES_DATABASE = Database in which the application that will connect
-  POSTGRES_USERNAME = Username of the application that will connect with postgres
-  POSTGRES_PASSWORD = Password of the application that will connect with postgres
-  POSTGRES_HOST = Host where postgres is working
-  POSTGRES_PORT = Port on which postgres is running
-
-
-```
 
 
 
