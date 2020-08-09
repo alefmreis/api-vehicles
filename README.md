@@ -58,6 +58,8 @@ Environment Variables
 ```
 
 #### Docker
+
+Go to the project folder and run the following command
 ```sh
 docker-compose up --build
 ```
@@ -65,11 +67,18 @@ Remember that when using docker, all environment variables are configured in the
 
 #### Node installation
 
+Go to the project folder and run the following commands
+
+
 ```sh
+# Install project dependencies
+
 npm install
 ```
 
 ```sh
+# Start application locally
+
 npm run dev
 ```
 
