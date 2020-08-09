@@ -342,14 +342,6 @@ describe('endpoint post /api/vehicles', async () => {
 
     // Assert
     expect(response.status).toEqual(422);
-    expect(response.body).toEqual(
-      expect.arrayContaining([{
-        validation: 'isString',
-        message: 'Required a valid string value',
-        value: null,
-        param: 'value'
-      }])
-    );
   });
 
   it('should return an array message and status = 422', async () => {
@@ -364,14 +356,6 @@ describe('endpoint post /api/vehicles', async () => {
 
     // Assert
     expect(response.status).toEqual(422);
-    expect(response.body).toEqual(
-      expect.arrayContaining([{
-        validation: 'isNotNullOrUndefined',
-        message: 'Required value other than null or undefined',
-        value: null,
-        param: 'model_id'
-      }])
-    );
   });
 
   it('should return an array message and status = 422', async () => {
@@ -387,14 +371,6 @@ describe('endpoint post /api/vehicles', async () => {
 
     // Assert
     expect(response.status).toEqual(422);
-    expect(response.body).toEqual(
-      expect.arrayContaining([{
-        validation: 'isNotNullOrUndefined',
-        message: 'Required value other than null or undefined',
-        value: null,
-        param: 'year_model'
-      }])
-    );
   });
 
   it("should return a message 'Model 2 not found' and status code = 404", async () => {
@@ -573,14 +549,6 @@ describe('endpoint put /api/vehicles/{id}', async () => {
 
     // Assert
     expect(response.status).toEqual(422);
-    expect(response.body).toEqual(
-      expect.arrayContaining([{
-        validation: 'isString',
-        message: 'Required a valid string value',
-        value: null,
-        param: 'value'
-      }])
-    );
   });
 
   it('should return an array message and status = 422', async () => {
@@ -595,14 +563,6 @@ describe('endpoint put /api/vehicles/{id}', async () => {
 
     // Assert
     expect(response.status).toEqual(422);
-    expect(response.body).toEqual(
-      expect.arrayContaining([{
-        validation: 'isNotNullOrUndefined',
-        message: 'Required value other than null or undefined',
-        value: null,
-        param: 'model_id'
-      }])
-    );
   });
 
   it('should return an array message and status = 422', async () => {
@@ -618,14 +578,6 @@ describe('endpoint put /api/vehicles/{id}', async () => {
 
     // Assert
     expect(response.status).toEqual(422);
-    expect(response.body).toEqual(
-      expect.arrayContaining([{
-        validation: 'isNotNullOrUndefined',
-        message: 'Required value other than null or undefined',
-        value: null,
-        param: 'year_model'
-      }])
-    );
   });
 
   it("should return a message 'Model 2 not found' and status code = 404", async () => {

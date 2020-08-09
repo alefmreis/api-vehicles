@@ -5,7 +5,7 @@ const pagingHelper = require('../_shared/helpers/paging.helper');
 const brandFluentValidate = require('../business/fluent-validators/brand.fluent-validator');
 
 class BrandService {
-  async getPaged(pageOffset, pageLimit, ctx) {
+  async getPagedResponse(pageOffset, pageLimit, ctx) {
     if (isNaN(pageOffset) || !check.integer(parseInt(pageOffset, 10))) {
       return onBadRequest({ message: 'Offset must be an integer' }, ctx)
     }
@@ -15,7 +15,7 @@ class BrandService {
     }
 
     if (pageLimit < 1 || pageLimit > 50) {
-      return onBadRequest({message: 'Limit must be greater than zero and less than fifty'}, ctx)
+      return onBadRequest({ message: 'Limit must be greater than zero and less than fifty' }, ctx)
     }
 
     const totalBrands = await repository.count();
@@ -24,7 +24,11 @@ class BrandService {
     return onSuccess(pagingHelper(pageOffset, pageLimit, totalBrands), brands, ctx);
   }
 
-  async getById(brandId, ctx) {
+  async getById(brandId) {
+    return repository.getById(brandId);
+  }
+
+  async getByIdResponse(brandId, ctx) {
     if (!check.integer(parseInt(brandId, 10))) {
       return onBadRequest({ message: 'Brand id must be an integer' }, ctx);
     }
@@ -38,11 +42,11 @@ class BrandService {
     return onSuccess({}, brand, ctx);
   }
 
-  async create(brand, ctx) {
+  async createResponse(brand, ctx) {
     const resultValidator = brandFluentValidate(brand);
 
     if (resultValidator.length > 0) {
-      return onUnprocessableEntity(validator, ctx);
+      return onUnprocessableEntity(resultValidator, ctx);
     }
 
     const existentBrand = await repository.getByName(brand.name);
@@ -56,24 +60,24 @@ class BrandService {
     return onCreated(newBrand, ctx);
   }
 
-  async update(brandId, brand, ctx) {
+  async updateResponse(brandId, brand, ctx) {
     if (!check.integer(parseInt(brandId, 10))) {
       return onBadRequest({ message: 'Brand id must be an integer' }, ctx);
     }
 
-    const validator = brandFluentValidate(brand);
+    const resultValidator = brandFluentValidate(brand);
 
-    if (validator.length > 0) {
-      return onUnprocessableEntity(validator, ctx);
+    if (resultValidator.length > 0) {
+      return onUnprocessableEntity(resultValidator, ctx);
     }
 
-    const existentBrand = await this.checkIfBrandExistsById(parseInt(brandId, 10));
+    const existentBrand = await repository.getById(parseInt(brandId, 10));
 
     if (!existentBrand) {
       return onNotFound({ message: `Brand ${brandId} not found` }, ctx);
     }
 
-    const existentBrandByName = await this.checkIfBrandExistsByName(brand.name);
+    const existentBrandByName = await repository.getByName(brand.name);
 
     if (existentBrandByName) {
       return onConflict({ message: `Brand ${brand.name} already exists` }, ctx);
@@ -84,19 +88,19 @@ class BrandService {
     return onUpdated(updatedBrand[n - 1], ctx);
   }
 
-  async delete(brandId, ctx) {
+  async deleteResponse(brandId, ctx) {
     if (!check.integer(parseInt(brandId, 10))) {
       return onBadRequest({ message: 'Brand id must be an integer' }, ctx);
     }
 
-    const brand = await this.checkIfBrandExistsById(parseInt(brandId, 10));
+    const brand = await repository.getById(parseInt(brandId, 10));
 
     if (!brand) {
       return onNotFound({ message: `Brand ${brandId} not found` }, ctx);
     }
 
     const modelService = require('./model.service');
-    const model = await modelService.checkIfModelExistsByBrandId(brandId);
+    const model = await modelService.getByBrandId(brandId);
 
     if (model) {
       return onConflict({ message: `You can not delete this brand ${brandId} because there is a model registered with this brand` }, ctx);
@@ -105,16 +109,6 @@ class BrandService {
     await repository.delete(brandId);
 
     return onNoContent(ctx);
-  }
-
-  async checkIfBrandExistsById(brandId) {
-    const brand = await repository.getById(brandId);
-    return !!brand;
-  }
-
-  async checkIfBrandExistsByName(brandName) {
-    const brand = await repository.getByName(brandName);
-    return !!brand;
   }
 }
 

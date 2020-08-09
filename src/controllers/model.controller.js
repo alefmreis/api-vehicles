@@ -5,7 +5,7 @@ class ModelController {
   async getPaged(ctx) {
     try {
       const { query } = ctx.request;
-      await service.getPaged(query.offset, query.limit, query.brandId, ctx);
+      await service.getPagedResponse(query.offset, query.limit, query.brandId, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -14,7 +14,7 @@ class ModelController {
   async getById(ctx) {
     try {
       const { id } = ctx.params;
-      await service.getById(id, ctx);
+      await service.getByIdResponse(id, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -23,8 +23,9 @@ class ModelController {
   async create(ctx) {
     try {
       const { body } = ctx.request;
-      await service.create(body, ctx);
+      await service.createResponse(body, ctx);
     } catch (error) {
+      console.log(error);
       onError(ctx);
     }
   }
@@ -33,7 +34,7 @@ class ModelController {
     try {
       const { body } = ctx.request;
       const { id } = ctx.params;
-      await service.update(id, body, ctx);
+      await service.updateResponse(id, body, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -42,7 +43,7 @@ class ModelController {
   async delete(ctx) {
     try {
       const { id } = ctx.params;
-      await service.delete(id, ctx);
+      await service.deleteResponse(id, ctx);
     } catch (error) {
       onError(ctx);
     }

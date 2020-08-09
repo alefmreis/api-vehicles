@@ -1,12 +1,9 @@
-module.exports = (brand) => {
-  if (typeof brand.name !== 'string') {
-    return [{
-      validation: 'isString',
-      message: 'Required a valid string value',
-      value: brand.name,
-      param: 'name'
-    }];
-  }
+const validator = require('fluent-validator');
 
-  return [];
+validator.add('isString', 'Required a valid string value', function (value) { return typeof value === 'string' });
+
+module.exports = (brand) => {
+  return validator()
+    .validate(brand.name).param('name').isNotNullOrUndefined().and.isString()
+    .getErrors();
 };
