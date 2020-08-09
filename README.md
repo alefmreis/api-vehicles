@@ -82,6 +82,8 @@ npm install
 npm run dev
 ```
 
+When using the node installed on the machine to run the application, you can configure the environment variables in the /src/_shared/application.environment.js file or use lib dotenv, importing it into the server.js file and don't forget to create an .env file at the root of your project for lib to configure the application's environment variables
+
 ## How to consume the API
   - After start an application you can access the swagger located on http://host:port/swagger
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "./node_modules/.bin/sequelize db:migrate && nodemon",
     "start": "./node_modules/.bin/sequelize db:migrate && node server.js",
     "pretest": "NODE_ENV=test ./node_modules/.bin/sequelize db:drop && NODE_ENV=test ./node_modules/.bin/sequelize db:create && NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
     "test": "jest --coverage=true --runInBand"
