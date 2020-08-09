@@ -6,7 +6,7 @@ class AuthorizationMiddleware {
     const { authorization } = ctx.request.headers;
 
     if (!authorization) {
-      return onUnauthorized({ message: 'Missing Authorization Header' }, ctx);
+      return onBadRequest({ message: 'Missing Authorization Header' }, ctx);
     }
 
     const [basicType, basicToken] = authorization.split(' ');
