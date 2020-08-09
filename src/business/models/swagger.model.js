@@ -227,6 +227,12 @@ module.exports = {
             "in": "query",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "brandId",
+            "in": "query",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
@@ -414,6 +420,12 @@ module.exports = {
             "name": "limit",
             "in": "query",
             "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "modelId",
+            "in": "query",
+            "required": false,
             "type": "integer"
           }
         ],
