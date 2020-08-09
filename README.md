@@ -73,7 +73,7 @@ Application Environment Variables
   POSTGRES_HOST = Host where postgres is working
   POSTGRES_PORT = Port on which postgres is running
 
-  
+
 ```
 
 
@@ -85,16 +85,7 @@ Application Environment Variables
 
 
 
-Change Log semantical version
 
-
-
-
-Como subir a aplicação localmente
-
-como consome a api
-  - colocar swagger
-  - colar collection do postman
 
 
 
