@@ -1,4 +1,4 @@
-const env = require('../application.environment');
+const dbConfig = require('./postgres.config');
 const Sequelize = require('sequelize');
 
 class Database {
@@ -11,13 +11,7 @@ class Database {
   }
 
   static connect() {
-    Database.connection = new Sequelize(`postgres://${env.postgres.username}:${env.postgres.password}@${env.postgres.host}:${env.postgres.port}/${env.postgres.database}`, {
-      define: {
-        underscored: true,
-        timestamps: true,
-        paranoid: true
-      }
-    });
+    Database.connection = new Sequelize(dbConfig);
   }
 }
 

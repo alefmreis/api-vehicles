@@ -21,7 +21,7 @@ class BrandService {
       return onBadRequest({ message: 'Brand id must be an integer' }, ctx);
     }
 
-    const brand = await repository.getById(brandId);
+    const brand = await repository.getById(parseInt(brandId, 10));
 
     if (!brand) {
       return onNotFound({ message: `Brand ${brandId} not found` }, ctx);
@@ -59,7 +59,7 @@ class BrandService {
       return onUnprocessableEntity(validator, ctx);
     }
 
-    const existentBrand = await this.checkIfBrandExistsById(brandId);
+    const existentBrand = await this.checkIfBrandExistsById(parseInt(brandId, 10));
 
     if (!existentBrand) {
       return onNotFound({ message: `Brand ${brandId} not found` }, ctx);
@@ -81,7 +81,7 @@ class BrandService {
       return onBadRequest({ message: 'Brand id must be an integer' }, ctx);
     }
 
-    const brand = await this.checkIfBrandExistsById(brandId);
+    const brand = await this.checkIfBrandExistsById(parseInt(brandId, 10));
 
     if (!brand) {
       return onNotFound({ message: `Brand ${brandId} not found` }, ctx);

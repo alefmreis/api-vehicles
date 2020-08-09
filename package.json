@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "NODE_ENV=test ./node_modules/.bin/sequelize db:drop && NODE_ENV=test ./node_modules/.bin/sequelize db:create && NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
+    "test": "jest --coverage=true"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "fluent-validator": "^1.1.0",
     "glob": "^7.1.6",
     "http-status": "^1.4.2",
+    "jest": "^26.2.2",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.1.0",
@@ -34,6 +36,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "nodemon": "^2.0.4",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^4.0.2"
   }
 }
