@@ -1,8 +1,8 @@
 module.exports = {
   baseApi: 'api',
   authentication: {
-    username: process.env.ADMIN_USERNAME || 'username',
-    password: process.env.ADMIN_PASSWORD || 'password'
+    username: (process.env.NODE_ENV === 'test') ? 'username' : process.env.ADMIN_USERNAME,
+    password: (process.env.NODE_ENV === 'test') ? 'password' : process.env.ADMIN_PASSWORD
   },
   postgres: {
     database: process.env.POSTGRES_DATABASE,
