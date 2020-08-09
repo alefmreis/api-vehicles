@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "pretest": "NODE_ENV=test ./node_modules/.bin/sequelize db:drop && NODE_ENV=test ./node_modules/.bin/sequelize db:create && NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
-    "test": "jest --coverage=true"
+    "test": "jest --coverage=true --runInBand"
   },
   "repository": {
     "type": "git",

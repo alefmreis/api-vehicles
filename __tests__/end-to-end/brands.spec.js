@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 const request = require('supertest');
 const Application = require('../../src/_shared/application');
 

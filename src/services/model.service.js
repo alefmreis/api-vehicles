@@ -26,7 +26,7 @@ class ModelService {
       return onBadRequest({ message: 'Model id must be an integer' }, ctx);
     }
 
-    const model = await repository.getById(modelId);
+    const model = await repository.getById(parseInt(modelId, 10));
 
     if (!model) {
       return onNotFound({ message: `Model ${modelId} not found` }, ctx);
@@ -70,7 +70,7 @@ class ModelService {
       return onUnprocessableEntity(validator, ctx);
     }
 
-    const existentModel = await this.checkIfModelExistsById(modelId);
+    const existentModel = await this.checkIfModelExistsById(parseInt(modelId, 10));
 
     if (!existentModel) {
       return onNotFound({ message: `Model ${modelId} not found` }, ctx);
@@ -98,7 +98,7 @@ class ModelService {
       return onBadRequest({ message: 'Model id must be an integer' }, ctx);
     }
 
-    const model = await this.checkIfModelExistsById(modelId);
+    const model = await this.checkIfModelExistsById(parseInt(modelId, 10));
 
     if (!model) {
       return onNotFound({ message: `Model ${modelId} not found` }, ctx);
