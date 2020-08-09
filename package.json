@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon",
+    "start": "./node_modules/.bin/sequelize db:migrate && node server.js",
     "pretest": "NODE_ENV=test ./node_modules/.bin/sequelize db:drop && NODE_ENV=test ./node_modules/.bin/sequelize db:create && NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
     "test": "jest --coverage=true --runInBand"
   },
@@ -23,11 +24,14 @@
     "fluent-validator": "^1.1.0",
     "glob": "^7.1.6",
     "http-status": "^1.4.2",
+    "i": "^0.3.6",
     "jest": "^26.2.2",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.1.0",
     "koa2-cors": "^2.0.6",
+    "koa2-swagger-ui": "^4.0.1",
+    "npm": "^6.14.7",
     "pg": "^8.3.0",
     "sequelize": "^6.3.4"
   },

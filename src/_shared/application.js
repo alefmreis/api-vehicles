@@ -2,6 +2,7 @@ const Koa = require('koa');
 const cors = require('koa2-cors');
 const database = require('../_shared/database/postgres');
 const env = require('./application.environment');
+const swagger = require('koa2-swagger-ui');
 
 class Application {
   constructor() {
@@ -16,6 +17,13 @@ class Application {
     this.server.use(cors({
       allowMethods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
       credentials: true
+    }));
+    this.server.use(swagger({
+      title: 'Vehicles MVP - Swagger',
+      routePrefix: '/swagger',
+      swaggerOptions: {
+        url: `http://localhost:${env.port}/${env.baseApi}/swagger`,
+      }      
     }));
   }
 
