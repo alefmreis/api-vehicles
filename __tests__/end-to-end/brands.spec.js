@@ -11,13 +11,40 @@ describe('endpoint get /api/brands', async () => {
     await Brand.create(brand);
   });
 
-  it("should return a bad request message 'offset and limit must be an integer' and status code = 400", async () => {
+  it("should return a bad request message 'Offset must be an integer' and status code = 400", async () => {
     // Act
-    const response = await request(server.callback()).get('/api/brands');
+    const response = await request(server.callback()).get('/api/brands?offset=asd');
 
     // Assert
     expect(response.status).toEqual(400);
-    expect(response.body).toEqual({ message: 'offset and limit must be an integer' });
+    expect(response.body).toEqual({ message: 'Offset must be an integer' });
+  });
+
+  it("should return a bad request message 'Limit must be an integer' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback()).get('/api/brands?offset=0&limit=asdf');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Limit must be an integer' });
+  });
+
+  it("should return a bad request message 'Limit must be greater than zero and less than fifty' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback()).get('/api/brands?offset=0&limit=51');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Limit must be greater than zero and less than fifty' });
+  });
+
+  it("should return a bad request message 'Limit must be greater than zero and less than fifty' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback()).get('/api/brands?offset=0&limit=0');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Limit must be greater than zero and less than fifty' });
   });
 
   it('should return a successes request with meta and data', async () => {
