@@ -15,7 +15,7 @@ class Application {
   setServerMiddlewares() {
     this.server.use(require('koa-bodyparser')());
     this.server.use(cors({
-      allowMethods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
+      allowMethods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
       credentials: true
     }));
     this.server.use(swagger({

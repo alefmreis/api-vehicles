@@ -7,11 +7,19 @@ const brandService = require('./brand.service');
 
 class ModelService {
   async getPaged(pageOffset, pageLimit, brandId, ctx) {
-    if (!check.integer(parseInt(pageOffset, 10)) || !check.integer(parseInt(pageLimit, 10))) {
-      return onBadRequest({ message: 'offset and limit must be an integer' }, ctx);
+    if (isNaN(pageOffset) || !check.integer(parseInt(pageOffset, 10))) {
+      return onBadRequest({ message: 'Offset must be an integer' }, ctx)
     }
 
-    if (brandId && !check.integer(parseInt(brandId, 10))) {
+    if (isNaN(pageLimit) || !check.integer(parseInt(pageLimit, 10))) {
+      return onBadRequest({ message: 'Limit must be an integer' }, ctx)
+    }
+
+    if (pageLimit < 1 || pageLimit > 50) {
+      return onBadRequest({ message: 'Limit must be greater than zero and less than fifty' }, ctx)
+    }
+
+    if (brandId && (isNaN(brandId) || !check.integer(parseInt(brandId, 10)))) {
       return onBadRequest({ message: 'brandId must be an integer' }, ctx);
     }
 

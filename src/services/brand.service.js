@@ -6,8 +6,16 @@ const brandFluentValidate = require('../business/fluent-validators/brand.fluent-
 
 class BrandService {
   async getPaged(pageOffset, pageLimit, ctx) {
-    if (!check.integer(parseInt(pageOffset, 10)) || !check.integer(parseInt(pageLimit, 10))) {
-      return onBadRequest({ message: 'offset and limit must be an integer' }, ctx);
+    if (isNaN(pageOffset) || !check.integer(parseInt(pageOffset, 10))) {
+      return onBadRequest({ message: 'Offset must be an integer' }, ctx)
+    }
+
+    if (isNaN(pageLimit) || !check.integer(parseInt(pageLimit, 10))) {
+      return onBadRequest({ message: 'Limit must be an integer' }, ctx)
+    }
+
+    if (pageLimit < 1 || pageLimit > 50) {
+      return onBadRequest({message: 'Limit must be greater than zero and less than fifty'}, ctx)
     }
 
     const totalBrands = await repository.count();
@@ -31,13 +39,13 @@ class BrandService {
   }
 
   async create(brand, ctx) {
-    const validator = brandFluentValidate(brand);
+    const resultValidator = brandFluentValidate(brand);
 
-    if (validator.length > 0) {
+    if (resultValidator.length > 0) {
       return onUnprocessableEntity(validator, ctx);
     }
 
-    const existentBrand = await this.checkIfBrandExistsByName(brand.name);
+    const existentBrand = await repository.getByName(brand.name);
 
     if (existentBrand) {
       return onConflict({ message: `Brand ${brand.name} already exists` }, ctx);

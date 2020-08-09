@@ -7,11 +7,19 @@ const modelService = require('./model.service');
 
 class VehicleService {
   async getPaged(pageOffset, pageLimit, modelId, ctx) {
-    if (!check.integer(parseInt(pageOffset, 10)) || !check.integer(parseInt(pageLimit, 10))) {
-      return onBadRequest({ message: 'offset and limit must be an integer' }, ctx);
+    if (isNaN(pageOffset) || !check.integer(parseInt(pageOffset, 10))) {
+      return onBadRequest({ message: 'Offset must be an integer' }, ctx)
     }
 
-    if (modelId && !check.integer(parseInt(modelId, 10))) {
+    if (isNaN(pageLimit) || !check.integer(parseInt(pageLimit, 10))) {
+      return onBadRequest({ message: 'Limit must be an integer' }, ctx)
+    }
+
+    if (pageLimit < 1 || pageLimit > 50) {
+      return onBadRequest({ message: 'Limit must be greater than zero and less than fifty' }, ctx)
+    }
+
+    if (modelId && (isNaN(modelId) || !check.integer(parseInt(modelId, 10)))) {
       return onBadRequest({ message: 'modelId must be an integer' }, ctx);
     }
 
