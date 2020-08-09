@@ -97,6 +97,49 @@ describe('endpoint get /api/models/{id}', async () => {
     await Model.create(model);
   });
 
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/models/name');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/models/name')
+      .set('Authorization', 'sadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/models/name')
+      .set('Authorization', 'Basicsadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/models/name')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`);
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
+  });
+
   it("should return a message 'Model id must be an integer' and status code = 400", async () => {
     // Act
     const response = await request(server.callback())
@@ -154,6 +197,65 @@ describe('endpoint post /api/models', async () => {
     const { Model } = require('../../src/business/models/model.model');
     const model = { name: 'Model 1', brand_id: 1 };
     await Model.create(model);
+  });
+
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/models')
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/models')
+      .set('Authorization', 'sadfghjgfdsa')
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/models')
+      .set('Authorization', 'Basicsadfghjgfdsa')
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/models')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`)
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
   });
 
   it('should return an array message and status = 422', async () => {
@@ -263,6 +365,65 @@ describe('endpoint put /api/models/{id}', async () => {
     const { Model } = require('../../src/business/models/model.model');
     const model = { name: 'Model 1', brand_id: 1 };
     await Model.create(model);
+  });
+
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/models/name')
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/models/name')
+      .set('Authorization', 'sadfghjgfdsa')
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/models/name')
+      .set('Authorization', 'Basicsadfghjgfdsa')
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/models/name')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`)
+      .send({
+        name: 'Model 1',
+        brand_id: 1
+      });
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
   });
 
   it("should return a message 'Model id must be an integer' and status code = 400", async () => {
@@ -402,6 +563,49 @@ describe('endpoint delete /api/models/{id}', async () => {
     await Vehicle.create(vehicle);
   });
 
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/models/name');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/models/name')
+      .set('Authorization', 'sadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/models/name')
+      .set('Authorization', 'Basicsadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/models/name')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`);
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
+  });
+
   it("should return a message 'Model id must be an integer' and status code = 400", async () => {
     // Act
     const response = await request(server.callback())
@@ -448,7 +652,6 @@ describe('endpoint delete /api/models/{id}', async () => {
     // Assert
     expect(response.status).toEqual(204);
   });
-
 
   afterAll(async () => {
     const { Brand } = require('../../src/business/models/brand.model');

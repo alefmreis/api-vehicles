@@ -148,6 +148,7 @@ describe('endpoint post /api/brands', async () => {
     const brand = { name: 'Brand 1' };
     await Brand.create(brand);
   });
+
   it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
     // Act
     const response = await request(server.callback())
@@ -404,6 +405,7 @@ describe('endpoint delete /api/brands/{id}', async () => {
     const model = { name: 'Model 1', brand_id: 1 };
     await Model.create(model);
   });
+  
   it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
     // Act
     const response = await request(server.callback())

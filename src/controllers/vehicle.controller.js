@@ -5,7 +5,7 @@ class VehicleController {
   async getPaged(ctx) {
     try {
       const { query } = ctx.request;
-      return service.getPaged(query.offset, query.limit, query.modelId, ctx);
+      await service.getPaged(query.offset, query.limit, query.modelId, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -14,7 +14,7 @@ class VehicleController {
   async getById(ctx) {
     try {
       const { id } = ctx.params;
-      return service.getById(id, ctx);
+      await service.getById(id, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -23,7 +23,7 @@ class VehicleController {
   async create(ctx) {
     try {
       const { body } = ctx.request;
-      return service.create(body, ctx);
+      await service.create(body, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -33,7 +33,7 @@ class VehicleController {
     try {
       const { body } = ctx.request;
       const { id } = ctx.params;
-      return service.update(id, body, ctx);
+      await service.update(id, body, ctx);
     } catch (error) {
       onError(ctx);
     }
@@ -42,7 +42,7 @@ class VehicleController {
   async delete(ctx) {
     try {
       const { id } = ctx.params;
-      return service.delete(id, ctx);
+      await service.delete(id, ctx);
     } catch (error) {
       onError(ctx);
     }
