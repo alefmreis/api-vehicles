@@ -43,7 +43,7 @@ Fluent validator that enables validation on multiple object parameters at once.
 Jest is a delightful JavaScript Testing Framework with a focus on simplicity. 
 
 
-## How to run the application locally
+## How to run the API locally
 
 Environment Variables
 ```
@@ -82,8 +82,40 @@ npm install
 npm run dev
 ```
 
+## How to consume the API
+  - After start an application you can access the swagger located on http://host:port/swagger
+
+  - If you not confortable with swagger, you can use the following postman link https://www.getpostman.com/collections/3891fe2062a60fce39dc to consume this API
 
 
+## How to run the API tests
+
+#### Docker
+
+Open your command line and run the following command. Remember that if you are using the postgres container, you must have it running
+```sh
+ docker ps
+```
+Copy the api-vehicles container id and exec the following command
+
+```sh
+docker exec -it copiedId bash
+```
+
+To finalize run
+
+```sh
+npm run test
+```
+
+
+#### Node Instalation
+
+ Go to the project folder and run the following command
+
+```sh
+npm run test
+```
 
 
 
