@@ -125,6 +125,49 @@ describe('endpoint get /api/vehicles/{id}', async () => {
     await Vehicle.create(vehicle);
   });
 
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/vehicles/name');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/vehicles/name')
+      .set('Authorization', 'sadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/vehicles/name')
+      .set('Authorization', 'Basicsadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .get('/api/vehicles/name')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`);
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
+  });
+
   it("should return a message 'Vehicle id must be an integer' and status code = 400", async () => {
     // Act
     const response = await request(server.callback())
@@ -191,6 +234,73 @@ describe('endpoint post /api/vehicles', async () => {
     const { Vehicle } = require('../../src/business/models/vehicle.model');
     const vehicle = { value: 'R$ 14.532,00', model_id: 1, year_model: 2010, fuel: 'ETANOL' };
     await Vehicle.create(vehicle);
+  });
+
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/vehicles')
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/vehicles')
+      .set('Authorization', 'sadfghjgfdsa')
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/vehicles')
+      .set('Authorization', 'Basicsadfghjgfdsa')
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .post('/api/vehicles')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`)
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
   });
 
   it('should return an array message and status = 422', async () => {
@@ -325,6 +435,73 @@ describe('endpoint put /api/vehicles/{id}', async () => {
     const { Vehicle } = require('../../src/business/models/vehicle.model');
     const vehicle = { value: 'R$ 14.532,00', model_id: 1, year_model: 2010, fuel: 'ETANOL' };
     await Vehicle.create(vehicle);
+  });
+
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/vehicles/name')
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/vehicles/name')
+      .set('Authorization', 'sadfghjgfdsa')
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/vehicles/name')
+      .set('Authorization', 'Basicsadfghjgfdsa')
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .put('/api/vehicles/name')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`)
+      .send({
+        value: 'R$ 14.532,00',
+        model_id: 2,
+        year_model: 2000,
+        fuel: 'GASOLINA'
+      });
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
   });
 
   it("should return a message 'Vehicle id must be an integer' and status code = 400", async () => {
@@ -489,6 +666,49 @@ describe('endpoint delete /api/vehicles/{id}', async () => {
     const { Vehicle } = require('../../src/business/models/vehicle.model');
     const vehicle = { value: 'R$ 14.532,00', model_id: 1, year_model: 2010, fuel: 'ETANOL' };
     await Vehicle.create(vehicle);
+  });
+
+  it("should return a message 'Missing Authorization Header' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/vehicles/name');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Missing Authorization Header' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/vehicles/name')
+      .set('Authorization', 'sadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'Bad Authentication' and status code = 400", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/vehicles/name')
+      .set('Authorization', 'Basicsadfghjgfdsa');
+
+    // Assert
+    expect(response.status).toEqual(400);
+    expect(response.body).toEqual({ message: 'Bad Authentication' });
+  });
+
+  it("should return a message 'You do not have access to this resource' and status code = 401", async () => {
+    // Act
+    const response = await request(server.callback())
+      .delete('/api/vehicles/name')
+      .set('Authorization', `Basic ${Buffer.from('username_test:password_test').toString('base64')}`);
+
+    // Assert
+    expect(response.status).toEqual(401);
+    expect(response.body).toEqual({ message: 'You do not have access to this resource' });
   });
 
   it("should return a message 'Vehicle id must be an integer' and status code = 400", async () => {
