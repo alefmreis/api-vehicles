@@ -60,6 +60,7 @@ Jest is a delightful JavaScript Testing Framework with a focus on simplicity. To
   POSTGRES_HOST = Host where postgres is working
   POSTGRES_PORT = Port on which postgres is running
 ```
+You need create a file called .env at the root of the project. If you have any questions on how to configure your .env, take a look at the .env.sample file
 
 #### Docker
 
@@ -85,7 +86,7 @@ npm install
 npm run dev
 ```
 
-Don't forget to configure your .env file at the root of the project. If you have any questions on how to configure your .env, take a look at the .env.sample file
+Don't forget to configure your .env file at the root of the project.
 
 ## How to consume the API
   - After start an application you can access the swagger located on http://localhost:3500/swagger
