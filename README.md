@@ -2,7 +2,7 @@
 
 **Version 1.0.0** - [Change log](CHANGELOG.md)
 
-## <b> Introduction
+## Introduction
 
 This project is an MVP of an API that performs query actions in which several users can perform queries on vehicles, models and brands. However, these entities still need to be registered and updated and even deleted. Therefore, the project will have public endpoints (general queries only) and private endpoints that are for searching for a certain item, entries, updates and deletions.
 
