@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Application = require('./src/_shared/application');
 
 (async () => {

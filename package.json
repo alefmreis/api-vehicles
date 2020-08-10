@@ -21,6 +21,7 @@
   "homepage": "https://github.com/alefmreis/api-vehicles#readme",
   "dependencies": {
     "check-types": "^11.1.2",
+    "dotenv": "^8.2.0",
     "fluent-validator": "^1.1.0",
     "glob": "^7.1.6",
     "http-status": "^1.4.2",

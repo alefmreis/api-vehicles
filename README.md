@@ -2,7 +2,7 @@
 
 **Version 1.0.0** - [Change log](CHANGELOG.md)
 
-## Introduction
+## <b> Introduction
 
 This project is an MVP of an API that performs query actions in which several users can perform queries on vehicles, models and brands. However, these entities still need to be registered and updated and even deleted. Therefore, the project will have public endpoints (general queries only) and private endpoints that are for searching for a certain item, entries, updates and deletions.
 
@@ -27,7 +27,9 @@ This project is an MVP of an API that performs query actions in which several us
 ## Technologies Used
 
 #### NodeJS
-Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine. Thats enable to develop on server-side.
+Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine. Thats enable to develop on server-side. 
+
+To know more click ![here](https://nodejs.org/en/about/)
 
 #### Koa
 Koa is a new web framework which aims to be a smaller, more expressive, and more robust foundation for web applications and APIs.
@@ -45,7 +47,7 @@ Fluent validator that enables validation on multiple object parameters at once.
 Jest is a delightful JavaScript Testing Framework with a focus on simplicity. 
 
 
-## How to run the API locally
+## <b> How to run the API locally
 
 Environment Variables
 ```
@@ -63,14 +65,11 @@ Environment Variables
 
 Go to the project folder and run the following command
 ```sh
-docker-compose up --build
+docker-compose up
 ```
-Remember that when using docker, all environment variables are configured in the docker-compose.yml file.
 
-#### Node installation
-
+#### Local
 Go to the project folder and run the following commands
-
 
 ```sh
 # Install project dependencies
@@ -84,7 +83,7 @@ npm install
 npm run dev
 ```
 
-When using the node installed on the machine to run the application, you can configure the environment variables in the /src/_shared/application.environment.js file or use lib dotenv, importing it into the server.js file and don't forget to create an .env file at the root of your project for lib to configure the application's environment variables
+Don't forget to configure your .env file at the root of the project. If you have any questions on how to configure your .env, take a look at the .env.sample file
 
 ## How to consume the API
   - After start an application you can access the swagger located on http://host:port/swagger
@@ -92,28 +91,16 @@ When using the node installed on the machine to run the application, you can con
   - If you not confortable with swagger, you can use the following postman link https://www.getpostman.com/collections/3891fe2062a60fce39dc to consume this API
 
 
-## How to run the API tests
+## <b> How to run the API tests
 
 #### Docker
 
 Open your command line and run the following command. Remember that if you are using the postgres container, you must have it running
 ```sh
- docker ps
-```
-Copy the api-vehicles container id and exec the following command
-
-```sh
-docker exec -it copiedId bash
+ docker exec -it api-vehicles npm run test
 ```
 
-To finalize run
-
-```sh
-npm run test
-```
-
-
-#### Node Instalation
+#### Local
 
  Go to the project folder and run the following command
 

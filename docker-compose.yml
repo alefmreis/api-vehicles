@@ -18,15 +18,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: api-vehicles
-    environment:
-      PORT: 3500
-      ADMIN_USERNAME: admin_username
-      ADMIN_PASSWORD: admin_password
-      POSTGRES_DATABASE: postgres_database
-      POSTGRES_USERNAME: postgres_username
-      POSTGRES_PASSWORD: postgres_password
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
+    env_file:
+      - .env      
     restart: on-failure     
     volumes:
       - ./:/app
