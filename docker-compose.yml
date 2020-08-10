@@ -26,7 +26,8 @@ services:
       POSTGRES_USERNAME: postgres_username
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432     
+      POSTGRES_PORT: 5432
+    restart: on-failure     
     volumes:
       - ./:/app
       - /app/node_modules
