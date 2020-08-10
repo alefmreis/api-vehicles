@@ -38,19 +38,13 @@ Sequelize is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite an
 To know more click [here](https://sequelize.org/master/)
 
 #### PostgreSQL
-PostgreSQL is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.
-
-To know more click [here](https://www.postgresql.org/about/)
+PostgreSQL is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads. To know more click [here](https://www.postgresql.org/about/)
 
 #### Fluent Validator
-Fluent validator that enables validation on multiple object parameters at once.
-
-To know more click [here](https://www.npmjs.com/package/fluent-validator)
+Fluent validator that enables validation on multiple object parameters at once. To know more click [here](https://www.npmjs.com/package/fluent-validator)
 
 #### Jest
-Jest is a delightful JavaScript Testing Framework with a focus on simplicity. 
-
-To know more click [here](https://jestjs.io/docs/en/getting-started)
+Jest is a delightful JavaScript Testing Framework with a focus on simplicity. To know more click [here](https://jestjs.io/docs/en/getting-started)
 
 
 ## How to setup the Application
